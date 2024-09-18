@@ -26,14 +26,14 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		whereIn();
-		subQueries();
-		queriesFunctionAggregation();
-		personalizedQueries();
-		personalizedQueries2();
+		//whereIn();
+		//subQueries();
+		//queriesFunctionAggregation();
+		//personalizedQueries();
+		//personalizedQueries2();
 		personalizedQueriesDistinct();
-		personalizedQueriesBetween();
-		personalizedQueriesConcatUpperAndLowerCase();
+		//personalizedQueriesBetween();
+		//personalizedQueriesConcatUpperAndLowerCase();
 	}
 
 	@Transactional(readOnly = true)
@@ -46,16 +46,24 @@ public class SpringbootJpaApplication implements CommandLineRunner{
 	@Transactional(readOnly = true)
 	public void subQueries() {
 		System.out.println("================== consulta por el nombre mas corto y su largo ==================");
-		List<Object[]> registers = repository.getShorterName();
-		registers.forEach(reg -> {
-			String name = (String) reg[0];
-			Integer length = (Integer) reg[1];
-			System.out.println("name=" + name + ", length=" + length);	
-		});
+	    List<Object[]> registers = repository.getShorterName();
+	    if (registers.isEmpty()) {
+	        System.out.println("No se encontraron registros.");
+	    } else {
+	        registers.forEach(reg -> {
+	            String name = (String) reg[0];
+	            Integer length = ((Number) reg[1]).intValue(); // Asegúrate de convertir a Integer de manera segura
+	            System.out.println("name=" + name + ", length=" + length);
+	        });
+	    }
 
-		System.out.println("================== consulta pra obtener el ultimo registro de persona ==================");
-		Optional<Person> optionalPerson = repository.getLastRegistration();
-		optionalPerson.ifPresent(System.out::println);
+	    System.out.println("================== consulta pra obtener el ultimo registro de persona ==================");
+	    Optional<Person> optionalPerson = repository.getLastRegistration();
+	    if (optionalPerson.isPresent()) {
+	        System.out.println(optionalPerson.get());
+	    } else {
+	        System.out.println("No se encontró la persona.");
+	    }
 	}
 	
 	@Transactional(readOnly = true)
