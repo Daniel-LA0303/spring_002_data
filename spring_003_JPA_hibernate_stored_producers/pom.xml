@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mx.jpa.proc</groupId>
-	<artifactId>4_Spring_JPA_Hibernate_Stored_Producers</artifactId>
+	<artifactId>spring-boot-web-stored-producers</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>4_Spring_JPA_Hibernate_Stored_Producers</name>
 	<description>Demo project for Spring Boot</description>
